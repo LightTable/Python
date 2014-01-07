@@ -1,4 +1,4 @@
-(ns lt.objs.langs.python
+(ns lt.plugins.python
   (:require [lt.object :as object]
             [lt.objs.eval :as eval]
             [lt.objs.console :as console]

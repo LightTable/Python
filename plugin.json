@@ -1,7 +1,7 @@
 {
   "name": "Python",
   "author": "Kodowa",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "source": "https://github.com/LightTable/Python",
   "desc": "Python language plugin for Light Table",
   "dependencies": {
