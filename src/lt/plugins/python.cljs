@@ -70,12 +70,6 @@
                         (object/merge! this {:client client :buffer ""})
                         nil))
 
-(defn escape-spaces [s]
-  (if (= files/separator "\\")
-    (str "\"" s "\"")
-    s))
-
-
 (defn run-py [{:keys [path project-path name client venv] :as info}]
   (let [n (notifos/working "Connecting..")
         obj (object/create ::connecting-notifier client)
@@ -86,7 +80,7 @@
               (assoc env "LT_IPYTHON_PATH" (:ipython-exe @python))
               env)]
     (proc/exec {:command (or (:python-exe @python) (:venv-py info) "python")
-                :args [(escape-spaces py-path) tcp/port (clients/->id client)]
+                :args [py-path tcp/port (clients/->id client)]
                 :cwd (or venv project-path)
                 :env env
                 :obj obj})))

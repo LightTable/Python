@@ -9,7 +9,6 @@
                      :lt.plugins.python/python-watch
                      :lt.plugins.python/python-image
                      :lt.plugins.python/watch-src
-                     [:lt.object/add-tag :watchable]
-                     (:lt.objs.editor/tab-settings false 4 4)]
+                     [:lt.object/add-tag :watchable]]
      :files [(:lt.objs.files/file-types [{:name "Python" :exts [:py :pyw] :mime "text/x-python" :tags [:editor.python]}])]
      :python.lang [:lt.plugins.python/eval! :lt.plugins.python/connect]}}
