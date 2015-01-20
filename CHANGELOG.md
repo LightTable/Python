@@ -1,5 +1,9 @@
 ##Changes
 
+###0.0.6
+
+* FIX: ensure that code and paths being compiled are encoded in utf8
+
 ###0.0.5
 
 * FIX: pathing issues on windows
