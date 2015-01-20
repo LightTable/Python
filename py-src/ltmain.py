@@ -46,6 +46,12 @@ def asUnicode(s):
   except:
     return str(s)
 
+def ensureUtf(s):
+  if type(s) == unicode:
+    return s.encode('utf8', 'ignore')
+  else:
+    return str(s)
+
 def findLoc(body, line, total):
   for i in range(len(body)):
     if body[i].lineno == line:
@@ -184,11 +190,11 @@ def handleEval(data):
       loc = form[0]
       isEval = False
       try:
-        code= compile(code, data[2]["name"], 'eval')
+        code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          code= compile(code, data[2]["name"], 'exec')
+          code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
@@ -196,7 +202,7 @@ def handleEval(data):
 
       try:
         if isEval:
-          result = eval(code, module.__dict__)
+          result = eval(ensureUtf(code), module.__dict__)
           send(data[0], "editor.eval.python.result", {"meta": loc, "result": asUnicode(result)})
         else:
           exec(code, module.__dict__)
@@ -254,11 +260,11 @@ def ipyEval(data):
       loc = form[0]
       isEval = False
       try:
-        compile(code, data[2]["name"], 'eval')
+        compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          compile(code, data[2]["name"], 'exec')
+          compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
