@@ -1,5 +1,9 @@
 ##Changes
 
+###0.0.7
+
+* FIX: bug introduced in UTF8 handling
+
 ###0.0.6
 
 * FIX: ensure that code and paths being compiled are encoded in utf8

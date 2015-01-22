@@ -202,7 +202,7 @@ def handleEval(data):
 
       try:
         if isEval:
-          result = eval(ensureUtf(code), module.__dict__)
+          result = eval(code, module.__dict__)
           send(data[0], "editor.eval.python.result", {"meta": loc, "result": asUnicode(result)})
         else:
           exec(code, module.__dict__)
