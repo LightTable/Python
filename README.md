@@ -2,6 +2,8 @@
 
 The official Python language plugin for Light Table.
 
+**Note: This plugin is seeking a maintainer as the core team does not use this**
+
 ###License
 
 Copyright (C) 2013 Kodowa Inc.
