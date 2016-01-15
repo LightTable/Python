@@ -46,7 +46,7 @@ def asUnicode(s):
   except:
     return str(s)
 
-def ensureUtf(s, encoding='utf8'):
+def toUnicode(s, encoding='utf8'):
   """Converts input to unicode if necessary.
 
   If `s` is bytes, it will be decoded using the `encoding` parameters.
@@ -200,11 +200,11 @@ def handleEval(data):
       loc = form[0]
       isEval = False
       try:
-        code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
+        code= compile(toUnicode(code), ensureUtf(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
+          code= compile(toUnicode(code), ensureUtf(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
@@ -270,11 +270,11 @@ def ipyEval(data):
       loc = form[0]
       isEval = False
       try:
-        compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
+        compile(toUnicode(code), ensureUtf(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
+          compile(toUnicode(code), ensureUtf(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
