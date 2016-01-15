@@ -200,11 +200,11 @@ def handleEval(data):
       loc = form[0]
       isEval = False
       try:
-        code= compile(toUnicode(code), ensureUtf(data[2]["name"]), 'eval')
+        code= compile(toUnicode(code), toUnicode(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          code= compile(toUnicode(code), ensureUtf(data[2]["name"]), 'exec')
+          code= compile(toUnicode(code), toUnicode(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
@@ -270,11 +270,11 @@ def ipyEval(data):
       loc = form[0]
       isEval = False
       try:
-        compile(toUnicode(code), ensureUtf(data[2]["name"]), 'eval')
+        compile(toUnicode(code), toUnicode(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          compile(toUnicode(code), ensureUtf(data[2]["name"]), 'exec')
+          compile(toUnicode(code), toUnicode(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
