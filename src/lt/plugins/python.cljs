@@ -16,8 +16,7 @@
             [clojure.string :as string]
             [lt.objs.clients :as clients]
             [lt.objs.notifos :as notifos]
-            [lt.util.load :as load]
-            [lt.util.cljs :refer [js->clj]])
+            [lt.util.load :as load])
   (:require-macros [lt.macros :refer [behavior defui]]))
 
 ;;****************************************************
