@@ -46,11 +46,21 @@ def asUnicode(s):
   except:
     return str(s)
 
-def ensureUtf(s):
-  if type(s) == unicode:
-    return s.encode('utf8', 'ignore')
+def toUnicode(s, encoding='utf8'):
+  """Converts input to unicode if necessary.
+
+  If `s` is bytes, it will be decoded using the `encoding` parameters.
+
+  This function is used for preprocessing /source/ and /filename/ arguments
+  to the builtin function `compile`.
+  """
+  # In Python2, str == bytes.
+  # In Python3, bytes remains unchanged, but str means unicode
+  # while unicode is not defined anymore
+  if type(s) == bytes:
+    return s.decode(encoding, 'ignore')
   else:
-    return str(s)
+    return s
 
 def findLoc(body, line, total):
   for i in range(len(body)):
@@ -190,11 +200,11 @@ def handleEval(data):
       loc = form[0]
       isEval = False
       try:
-        code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
+        code= compile(toUnicode(code), toUnicode(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          code= compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
+          code= compile(toUnicode(code), toUnicode(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
@@ -260,11 +270,11 @@ def ipyEval(data):
       loc = form[0]
       isEval = False
       try:
-        compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'eval')
+        compile(toUnicode(code), toUnicode(data[2]["name"]), 'eval')
         isEval = True
       except:
         try:
-          compile(ensureUtf(code), ensureUtf(data[2]["name"]), 'exec')
+          compile(toUnicode(code), toUnicode(data[2]["name"]), 'exec')
         except:
           e = traceback.format_exc()
           send(data[0], "editor.eval.python.exception", {"ex": cleanTrace(e), "meta": loc})
